@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tragaperras</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .columnas {
+        display: flex;
+      }
+
+      .columna {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        margin: 10px;
+        text-align: center;
+        line-height: 100px;
+        font-size: 24px;
+      }
+      #boton {
+        background-color: #d9534f;
+        color: white;
+        border: 3px solid #c9302c;
+        border-radius: 8px;
+        padding: 10px 30px;
+        font-size: 20px;
+      }
+
+      #boton:hover {
+        background-color: #c9302c;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>TRAGAPERRAS</h1>
+    <div class="columnas">
+      <div class="columna" id="columna1">?</div>
+      <div class="columna" id="columna2">?</div>
+      <div class="columna" id="columna3">?</div>
+    </div>
+    <p>
+      <button id="boton" onclick="reiniciarTragaperras()">AVANCE</button>
+    </p>
+
+    <script>
+      function obtenerSimboloAleatorio() {
+        const simbolos = ['🍒', '🍋', '🍇', '🍉', '🍎', '🍐', '7️⃣'];
+        return simbolos[Math.floor(Math.random() * simbolos.length)];
+      }
+
+      function mostrarSimboloEnColumna(columnaId) {
+        const simboloAleatorio = obtenerSimboloAleatorio();
+        document.getElementById(columnaId).innerText = simboloAleatorio;
+        return simboloAleatorio;
+      }
+
+      let juegoTerminado = false;
+
+      function seguirJugando() {
+        juegoTerminado = false;
+      }
+
+      //Botón
+
+      function reiniciarTragaperras() {
+        if (juegoTerminado) {
+          return;
+        }
+
+        const simbolo1 = mostrarSimboloEnColumna('columna1');
+        const simbolo2 = mostrarSimboloEnColumna('columna2');
+        const simbolo3 = mostrarSimboloEnColumna('columna3');
+
+        if (simbolo1 === simbolo2 && simbolo2 === simbolo3) {
+          juegoTerminado = true;
+          setTimeout(function () {
+            alert('JACKPOT!');
+            seguirJugando();
+          }, 1000);
+        } else if (simbolo1 === simbolo2) {
+          juegoTerminado = true;
+          setTimeout(function () {
+            alert('PREMIO!');
+            seguirJugando();
+          }, 1000);
+        }
+      }
+    </script>
+  </body>
+</html>
